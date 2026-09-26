@@ -84,7 +84,12 @@ async def generate_wardrobe_item_image(
             data=image_bytes,
         )
     )
-    version = await tool_context.save_artifact(filename, artifact_part)
+    version = None
+    try:
+        version = await tool_context.save_artifact(filename, artifact_part)
+    except Exception as e:
+        # Artifact service might not be initialized in non-adk-web standalone runs
+        pass
 
     # (2) Upload image bytes to public Cloud Storage bucket
     storage_client = get_storage_client()
