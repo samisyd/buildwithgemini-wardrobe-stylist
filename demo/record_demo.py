@@ -44,16 +44,16 @@ async def run():
         await page.evaluate("() => { document.getElementById('log').scrollTo({top: document.getElementById('log').scrollHeight, behavior: 'smooth'}); }")
         await asyncio.sleep(2)
         
-        # Action 2: Richer prompt showing tool calls / database lookup & image generation
-        print("Action 2: Typing richer prompt for database inspection & visual rendering...")
+        # Action 2: Requested prompt: casual wear for a summer day with flowers on them
+        print("Action 2: Typing summer floral casual wear prompt...")
         input_elem = page.locator("#input")
-        prompt_text = "Search my wardrobe catalog for jackets and generate a styled photo of a classic trench coat look."
+        prompt_text = "Generate a casual wear outfit for a sunny summer day with vibrant floral patterns on it."
         await input_elem.click()
         for char in prompt_text:
-            await input_elem.type(char, delay=30)
+            await input_elem.type(char, delay=28)
         await asyncio.sleep(1)
         
-        print("Submitting richer prompt...")
+        print("Submitting summer floral prompt...")
         await page.locator("form button").click()
         
         # Wait for the second agent reply
@@ -64,12 +64,12 @@ async def run():
         )
         
         # Wait for any <img> inside .a2card to finish loading
-        print("Waiting for image to load completely...")
+        print("Waiting for floral outfit image to load completely...")
         try:
-            await page.wait_for_selector(".a2card img", state="visible", timeout=15000)
+            await page.wait_for_selector(".a2card img", state="visible", timeout=20000)
             await page.wait_for_function(
                 "() => { const img = document.querySelector('.a2card img'); return img && img.complete && img.naturalHeight !== 0; }",
-                timeout=15000
+                timeout=20000
             )
         except Exception as e:
             print("Note on image waiting:", e)
@@ -77,7 +77,7 @@ async def run():
         await asyncio.sleep(2)
         
         # Center and smoothly scroll directly to the generated card / image so the full image and card are in prime focus
-        print("Scrolling into full view of the image card...")
+        print("Scrolling into full view of the floral summer image card...")
         await page.evaluate("""() => {
             const img = document.querySelector('.a2card img');
             if (img) {
@@ -88,10 +88,10 @@ async def run():
             }
         }""")
         
-        # Hold steady on the full image showcase for 6 seconds so viewers can appreciate the full rendering
+        # Hold steady on the full summer floral image showcase so viewers can appreciate the full design
         await asyncio.sleep(6)
         
-        # Smoothly scroll up slightly then down to show complete context
+        # Smoothly scroll up slightly to show complete dialogue context
         await page.evaluate("""() => {
             const card = document.querySelector('.msg-wrapper:last-child .a2card') || document.querySelector('.a2card img');
             if (card) {
