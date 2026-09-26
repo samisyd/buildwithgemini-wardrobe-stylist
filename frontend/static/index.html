@@ -37,12 +37,20 @@
   .a2text.a2-caption { font-size:.85rem; color:#666; }
   .a2divider { border:none; border-top:1px solid var(--border); margin:.4rem 0; width:100%; }
   .a2img { max-width:100%; border-radius:8px; display:block; }
-  .material-symbols-outlined { font-family:'Material Symbols Outlined'; font-size:1.25rem; line-height:1; vertical-align:middle; color:var(--accent); }
+  /* --- Example Prompt Pills --- */
+  .example-prompts { display:flex; gap:.5rem; padding:.5rem 1rem 0; overflow-x:auto; background:#fff; flex-wrap:wrap; }
+  .prompt-btn { background:var(--bg); border:1px solid var(--border); color:#065f46; font-size:.85rem; padding:.4rem .8rem; border-radius:20px; cursor:pointer; font-weight:500; transition:all .15s ease; white-space:nowrap; }
+  .prompt-btn:hover { background:#d1fae5; border-color:#10b981; }
 </style>
 </head>
 <body>
 <header>WardrobeAI: The Smart Style &amp; Closet Assistant</header>
 <div id="log"></div>
+<div class="example-prompts">
+  <button type="button" class="prompt-btn" onclick="sendPrompt('Show my wardrobe items and curate a casual outfit')">👕 Curate a casual outfit</button>
+  <button type="button" class="prompt-btn" onclick="sendPrompt('Check the weather in Paris and recommend an outfit')">🌤️ Weather-based outfit</button>
+  <button type="button" class="prompt-btn" onclick="sendPrompt('Calculate the cost-per-wear for my trench coat')">📊 Calculate cost-per-wear</button>
+</div>
 <form id="form">
   <input id="input" placeholder="Ask something…" autocomplete="off" autofocus>
   <button>Send</button>
@@ -179,6 +187,11 @@ function renderReply(b, parts) {
   }
   if (!b.childNodes.length) b.textContent = "(no response)";
   log.scrollTop = log.scrollHeight;
+}
+
+async function sendPrompt(text) {
+  input.value = text;
+  form.dispatchEvent(new Event("submit"));
 }
 
 // The proxy returns { parts: [{kind:"text",text} | {kind:"a2ui",data}] }.
