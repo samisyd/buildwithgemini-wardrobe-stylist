@@ -1,7 +1,7 @@
-# WardrobeStylist — Project Overview & Implementation Log
+# WardrobeAI: The Smart Style & Closet Assistant — Project Overview & Implementation Log
 
 ## Overview
-**WardrobeStylist** is an agentic AI assistant built with the Google Agent Development Kit (ADK) and Gemini on Google Cloud Vertex AI Agent Platform. It serves as an expert personal styling and wardrobe management companion, offering personalized outfit curation, catalog search, item inspection, apparel image generation, code sandbox analytics, and cross-session memory.
+**WardrobeAI** (The Smart Style & Closet Assistant) is an agentic AI assistant built with the Google Agent Development Kit (ADK) and Gemini on Google Cloud Vertex AI Agent Platform. It serves as an expert personal styling and wardrobe management companion, offering personalized outfit curation, catalog search, item inspection, apparel image generation, code sandbox analytics, and cross-session memory.
 
 ---
 
