@@ -74,8 +74,16 @@
 ---
 
 ## 3. Local Development & Serving
-- Playground startup command with Memory Bank:
+- Playground startup command with Memory Bank and Global Location:
   ```bash
-  uv run adk web . --port 8080 --reload_agents --memory_service_uri=agentengine://1257689569571110912
+  export GOOGLE_CLOUD_PROJECT="qwiklabs-gcp-04-7202d2aeaa87"
+  export GOOGLE_CLOUD_LOCATION="global"
+  uv run adk web . --port 8080 --reload_agents --memory_service_uri=agentengine://projects/311001706350/locations/us-east1/reasoningEngines/1257689569571110912
   ```
 - Accessible locally on `http://127.0.0.1:8080/dev-ui/?app=app`.
+
+---
+
+## 4. Verification & Testing
+- Verified live communication with Vertex AI in `global` region for `gemini-3.6-flash`.
+- Successfully validated weather queries, allergic constraint filtering (wool-free styling recommendations), A2UI v0.8 card formatting, artifact persistence, and memory ingestion.
