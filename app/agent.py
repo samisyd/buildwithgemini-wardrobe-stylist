@@ -69,6 +69,7 @@ from a2ui.schema.manager import A2uiSchemaManager
 
 from app.a2ui_utils import a2ui_callback
 from app.image_tools import generate_wardrobe_item_image
+from app.video_tools import generate_wardrobe_item_video
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.code_executors import AgentEngineSandboxCodeExecutor
 from google.adk.tools.preload_memory_tool import PreloadMemoryTool
@@ -100,10 +101,11 @@ instruction = schema_manager.generate_system_prompt(
         "list items using list_wardrobe_items, inspect specific garments using get_wardrobe_item, "
         "add new apparel items using add_wardrobe_item, "
         "and generate high quality visual images or outfit moodboards using generate_wardrobe_item_image. "
+        "You can also generate short dynamic video showcases for garments or looks using generate_wardrobe_item_video. "
         "You can also write and execute Python code in your secure sandbox to perform calculations, "
         "wardrobe analytics, cost-per-wear formulas, and budget estimations."
     ),
-    workflow_description="Analyze the request, call tools as needed to fetch catalog items or generate images, and return structured UI when appropriate.",
+    workflow_description="Analyze the request, call tools as needed to fetch catalog items or generate images/videos, and return structured UI when appropriate.",
     ui_description=(
         "Keep every surface tiny and flat: ONE Card > ONE Column > a few Text rows. "
         "Never nest a Card inside a Card. "
@@ -145,6 +147,7 @@ root_agent = Agent(
         get_wardrobe_item,
         add_wardrobe_item,
         generate_wardrobe_item_image,
+        generate_wardrobe_item_video,
     ],
     after_model_callback=a2ui_callback,
     after_agent_callback=generate_memories_callback,
